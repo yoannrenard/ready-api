@@ -1,0 +1,24 @@
+language: php
+
+sudo: false
+
+php:
+  - '7.0'
+
+cache:
+    directories:
+        - $HOME/.composer/cache/
+        - vendor
+
+install:
+    # Install dependencies
+    - composer self-update
+    - composer install --prefer-dist
+
+script:
+    # Run tests
+    - bin/phpunit
+
+after_failure:
+    # Display error logs
+    - cat /var/log/php_errors.log
