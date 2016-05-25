@@ -25,7 +25,9 @@
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0",
-        "phpunit/phpunit": "^5.3"
+        "phpunit/phpunit": "^5.3",
+        "behat/behat": "^3.1",
+        "behat/web-api-extension": "~1.0@dev"
     },
     "scripts": {
         "post-install-cmd": [
