@@ -12,11 +12,11 @@ Ready REST API
 
 - composer install
 
-# How to test
+# How to test it
 
 ## PHPUnit
 
-    bin/phpunit -c app/
+    bin/phpunit
 
 ## Behat
 
