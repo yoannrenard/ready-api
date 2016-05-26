@@ -27,7 +27,8 @@
         "symfony/phpunit-bridge": "^3.0",
         "phpunit/phpunit": "^5.3",
         "behat/behat": "^3.1",
-        "behat/web-api-extension": "~1.0@dev"
+        "behat/web-api-extension": "~1.0@dev",
+        "nelmio/api-doc-bundle": "^2.12"
     },
     "scripts": {
         "post-install-cmd": [
