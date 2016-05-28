@@ -11,7 +11,13 @@ Ready REST API
 
 # How to install
 
+## Locally
+
 - composer install
+
+## On Docker
+
+    make clean build start
 
 # How to test it
 
@@ -22,3 +28,7 @@ Ready REST API
 ## Behat
 
     bin/behat
+
+## API Doc
+
+    /api/doc
