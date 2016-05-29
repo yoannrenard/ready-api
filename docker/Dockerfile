@@ -2,13 +2,16 @@
 FROM debian:jessie
 
 RUN echo 'deb http://packages.dotdeb.org jessie all' >> /etc/apt/sources.list
+RUN echo 'deb http://nginx.org/packages/debian/ jessie nginx' >> /etc/apt/sources.list
+RUN echo 'deb-src http://nginx.org/packages/debian/ jessie nginx' >> /etc/apt/sources.list
 
 RUN apt-get update && apt-get install -yqq --force-yes \
     php7.0-fpm \
     php7.0-mysql \
     mysql-client \
     curl \
-    git-core
+    git-core \
+    nginx
 
 # Install Composer and make it available in the PATH
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/bin/ --filename=composer
@@ -22,12 +25,17 @@ ENV APP_RUN_MODE dev
 #ENV SYMFONY__DATABASE__PORT     ${MYSQL_PORT_3306_TCP_PORT}
 #ENV SYMFONY__DATABASE__NAME     ready
 
-#COPY . /app/symfony/
-WORKDIR /app/symfony/
+#COPY . /var/www/ready-api/
+WORKDIR /var/www/ready-api/
+
+COPY docker/config/ready.conf /etc/nginx/conf.d/ready.conf
 
 #RUN composer install
 
-#RUN chown -R php:php app/cache \
-#    && chown -R php:php app/logs
+USER root
+RUN chown -R www-data:www-data .
+#RUN chgrp -R www-data /var/www/ready-api/
+#RUN chmod -R g+w /var/www/ready-api/
+#USER www-data
 
 EXPOSE 80

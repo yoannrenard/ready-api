@@ -1,6 +1,8 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
 security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
@@ -13,12 +15,30 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
+        oauth_token:
+            pattern:    ^/oauth/v2/token
+            security:   false
+
+#        oauth_authorize:
+#            pattern:    ^/oauth/v2/authform_login:
+#            provider: fos_userbundle
+##            check_path: /oauth/v2/auth_login_check
+##            login_path: /oauth/v2/auth_login
+#            anonymous: true
+            # Add your favorite authentication process here
+
         main:
-            anonymous: ~
-            # activate different ways to authenticate
+            pattern:    ^/
+            fos_oauth:  true
+            stateless:  true
+            anonymous:  true
 
             # http_basic: ~
             # http://symfony.com/doc/current/book/security.html#a-configuring-how-your-users-will-authenticate
 
             # form_login: ~
             # http://symfony.com/doc/current/cookbook/security/form_login_setup.html
+
+    access_control:
+        - { path: ^/, roles: [ IS_AUTHENTICATED_FULLY ] }
+        - { path: ^/doc, role: IS_AUTHENTICATED_ANONYMOUSLY }
